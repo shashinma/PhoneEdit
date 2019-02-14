@@ -54,10 +54,11 @@ namespace PhoneEdit
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 3;
             });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -83,6 +84,10 @@ namespace PhoneEdit
                     name: "default",
                     template: "{controller=PhoneBook}/{action=Index}/{id?}");
             });
+
+            SampleData.CreateDefaultUser(serviceProvider).Wait();
         }
+
+        
     }
 }
