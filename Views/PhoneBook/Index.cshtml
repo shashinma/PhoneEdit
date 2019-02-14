@@ -6,14 +6,14 @@
 
 <h1>Телефонный справочник</h1>
 
-@if(User.Identity.IsAuthenticated)
+@if (User.Identity.IsAuthenticated)
 {
-<p align="right">
-    <input type="button" value="Добавить запись" class="btn btn-success"
-           onclick="location.href='@Url.Action("Create", "PhoneBook")'" />
-</p>
+    <p align="right">
+        <input type="button" value="Добавить запись" class="btn btn-success" \
+               onclick="location.href='@Url.Action("Create", "PhoneBook")'"/>
+    </p>
 }
-<table class="table">
+<table class="table-striped table-hover table-sm">
     <thead>
         <tr>
             <th>
@@ -40,42 +40,45 @@
             <th>
                 @Html.DisplayNameFor(model => model.Room)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayText("\t")
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PersonnelNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Position)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LocalPhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CityPhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Room)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersonnelNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocalPhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CityPhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info-circle"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-user-times"></i></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
