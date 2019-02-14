@@ -36,8 +36,9 @@ namespace PhoneEdit
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySql(
-                    Configuration.GetConnectionString("IdentityContext")));
+                options.UseMySql(Configuration.GetConnectionString("IdentityContext")));
+            services.AddDbContext<PhonebookContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("PhoneBookContext")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -80,7 +81,7 @@ namespace PhoneEdit
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=PhoneBook}/{action=Index}/{id?}");
             });
         }
     }

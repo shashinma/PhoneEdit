@@ -49,10 +49,10 @@ namespace PhoneEdit.Data
 
                 entity.Property(e => e.Name)
                     .IsRequired()
+                    .HasColumnName("name")
                     .HasColumnType("varchar(250)");
 
                 entity.Property(e => e.Status)
-                    .IsRequired()
                     .HasColumnName("status")
                     .HasColumnType("varchar(100)");
 
