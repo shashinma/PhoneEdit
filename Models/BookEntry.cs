@@ -10,32 +10,42 @@ namespace PhoneEdit.Models
     {
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
+
+        [Required]
+        [Remote(action: "VerifyPersonnelNumber", controller: "PhoneBook")]
         [DisplayName("Таб.№")]
         public string PersonnelNumber { get; set; }
+
+        [Required]
         [DisplayName("Имя")]
         public string Name { get; set; }
+
+        [Required]
         [DisplayName("Должность")]
         public string Position { get; set; }
-        [DisplayName("Отдел")]
-        public string Department { get; set; }
-        [DisplayName("М. тел.")]
-        public string LocalPhoneNumber { get; set; }
-        [DisplayName("Г. тел.")]
-        public string CityPhoneNumber { get; set; }
-        [DisplayName("Почта")]
-        public string Mail { get; set; }
-        [DisplayName("Комната")]
-        public string Room { get; set; }
-        [HiddenInput(DisplayValue = false)]
-        public string Status { get; set; }
 
-        public BookEntry()
-        {
-            Status = string.Empty;
-        }
+        [Required]
+        [DisplayName("Подразделение")]
+        public string Department { get; set; }
+
+        [DisplayName("М. тел.")]
+        public string LocalPhoneNumber { get; set; } = string.Empty;
+
+        [DisplayName("Г. тел.")]
+        public string CityPhoneNumber { get; set; } = string.Empty;
+
+        [DisplayName("Почта")]
+        public string Mail { get; set; } = string.Empty;
+
+        [DisplayName("Комната")]
+        public string Room { get; set; } = string.Empty;
+
+        [HiddenInput(DisplayValue = false)] 
+        public string Status { get; set; } = string.Empty;
 
         public override string ToString()
         {
+            // Used for full-text search
             return $"Entry: {Name} {Department} {Mail} {Room}";
         }
     }

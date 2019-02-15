@@ -178,5 +178,16 @@ namespace PhoneEdit.Controllers
         {
             return _context.Entries.Any(e => e.Id == id);
         }
+
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult VerifyPersonnelNumber(string personnelNumber)
+        {
+            if (_context.Entries.Any(e => e.PersonnelNumber == personnelNumber))
+            {
+                return Json($"Табельный номер {personnelNumber} уже существует");
+            }
+
+            return Json(true);
+        }
     }
 }

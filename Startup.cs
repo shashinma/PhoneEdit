@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using PhoneEdit.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PhoneEdit.Helpers;
 
 namespace PhoneEdit
 {
@@ -43,7 +44,9 @@ namespace PhoneEdit
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddMvcOptions(options => options.ModelMetadataDetailsProviders.Add(new CustomMetadataProvider()));
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -82,12 +85,11 @@ namespace PhoneEdit
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=PhoneBook}/{action=Index}");
+                    template: "{controller=PhoneBook}/{action=Index}/{id?}");
             });
 
             SampleData.CreateDefaultUser(serviceProvider).Wait();
         }
-
         
     }
 }
