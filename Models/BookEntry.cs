@@ -12,7 +12,7 @@ namespace PhoneEdit.Models
         public int Id { get; set; }
 
         [Required]
-        [Remote(action: "VerifyPersonnelNumber", controller: "PhoneBook")]
+        [Remote(action: "VerifyPersonnelNumber", controller: "PhoneBook", AdditionalFields = "Id")]
         [DisplayName("Таб.№")]
         public string PersonnelNumber { get; set; }
 

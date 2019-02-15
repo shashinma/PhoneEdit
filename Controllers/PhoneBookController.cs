@@ -180,9 +180,10 @@ namespace PhoneEdit.Controllers
         }
 
         [AcceptVerbs("Get", "Post")]
-        public IActionResult VerifyPersonnelNumber(string personnelNumber)
+        public IActionResult VerifyPersonnelNumber(string personnelNumber, int id)
         {
-            if (_context.Entries.Any(e => e.PersonnelNumber == personnelNumber))
+            var entry = _context.Entries.FirstOrDefault(e => e.PersonnelNumber == personnelNumber);
+            if(entry != null && entry.Id != id)
             {
                 return Json($"Табельный номер {personnelNumber} уже существует");
             }
