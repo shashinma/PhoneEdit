@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PhoneEdit.Data;
 using PhoneEdit.Models;
+using X.PagedList;
 
 namespace PhoneEdit.Controllers
 {
@@ -24,9 +25,33 @@ namespace PhoneEdit.Controllers
 
         // GET: PhoneBook
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string currentFilter, string searchString, int? cPage)
         {
-            return View(await _context.Entries.ToListAsync());
+            if (searchString != null)
+            {
+                cPage = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var entries = from e in _context.Entries
+                select e;
+                    
+                    
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                entries = entries.Where(e => e.ToString().Contains(searchString, StringComparison.OrdinalIgnoreCase));
+            }
+
+            entries = entries.OrderBy(e => e.Name);
+
+            int pageSize = 25;
+            int pageNumber = (cPage ?? 1);
+            return View((await entries.ToListAsync()).ToPagedList(pageNumber,pageSize));
         }
 
         // GET: PhoneBook/Details/5

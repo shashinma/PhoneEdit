@@ -82,7 +82,7 @@ namespace PhoneEdit
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=PhoneBook}/{action=Index}/{id?}");
+                    template: "{controller=PhoneBook}/{action=Index}");
             });
 
             SampleData.CreateDefaultUser(serviceProvider).Wait();

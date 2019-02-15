@@ -33,5 +33,10 @@ namespace PhoneEdit.Models
         {
             Status = string.Empty;
         }
+
+        public override string ToString()
+        {
+            return $"Entry: {Name} {Department} {Mail} {Room}";
+        }
     }
 }
