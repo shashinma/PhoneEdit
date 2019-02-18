@@ -100,7 +100,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td class="PersonalNumberTable">
                     <div class="badge badge-info">
                         @Html.DisplayFor(modelItem => item.PersonnelNumber)
                     </div>
@@ -114,16 +114,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Department)
                 </td>
-                <td>
+                <td class="LocalPhoneNumberTable">
                     @Html.DisplayFor(modelItem => item.LocalPhoneNumber)
                 </td>
-                <td>
+                <td class="CityPhoneNumberTable">
                     @Html.DisplayFor(modelItem => item.CityPhoneNumber)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Mail)
                 </td>
-                <td>
+                <td class="RoomTable">
                     @Html.DisplayFor(modelItem => item.Room)
                 </td>
                 @if (User.Identity.IsAuthenticated)
