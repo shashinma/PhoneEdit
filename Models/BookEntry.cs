@@ -15,11 +15,11 @@ namespace PhoneEdit.Models
         [Required]
         [Remote(action: "RemoteVerifyPersonnelNumber",
             controller: "PhoneBook", AdditionalFields = nameof(Id))]
-        [DisplayName("Таб.№")]
+        [DisplayName("Табельный номер")]
         public string PersonnelNumber { get; set; }
 
         [Required]
-        [DisplayName("Имя")]
+        [DisplayName("ФИО")]
         public string Name { get; set; }
 
         [Required]
@@ -30,10 +30,10 @@ namespace PhoneEdit.Models
         [DisplayName("Подразделение")]
         public string Department { get; set; }
 
-        [DisplayName("М. тел.")]
+        [DisplayName("Местный телефон")]
         public string LocalPhoneNumber { get; set; } = string.Empty;
 
-        [DisplayName("Г. тел.")]
+        [DisplayName("Городской телефон")]
         public string CityPhoneNumber { get; set; } = string.Empty;
 
         [DisplayName("Почта")]
