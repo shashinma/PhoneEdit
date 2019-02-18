@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using PhoneEdit.Helpers;
 
 namespace PhoneEdit.Models
 {
@@ -12,7 +13,8 @@ namespace PhoneEdit.Models
         public int Id { get; set; }
 
         [Required]
-        [Remote(action: "VerifyPersonnelNumber", controller: "PhoneBook", AdditionalFields = "Id")]
+        [Remote(action: "RemoteVerifyPersonnelNumber",
+            controller: "PhoneBook", AdditionalFields = nameof(Id))]
         [DisplayName("Таб.№")]
         public string PersonnelNumber { get; set; }
 

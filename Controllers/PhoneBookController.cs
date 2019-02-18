@@ -85,6 +85,10 @@ namespace PhoneEdit.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,PersonnelNumber,Name,Position,Department,LocalPhoneNumber,CityPhoneNumber,Mail,Room")] BookEntry bookEntry)
         {
+            if (!VerifyPersonnelNumber(bookEntry))
+            {
+                ModelState.AddModelError(nameof(bookEntry.PersonnelNumber), "Табельный номер уже существует");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(bookEntry);
@@ -122,6 +126,10 @@ namespace PhoneEdit.Controllers
                 return NotFound();
             }
 
+            if (!VerifyPersonnelNumber(bookEntry))
+            {
+                ModelState.AddModelError(nameof(bookEntry.PersonnelNumber), "Табельный номер уже существует");
+            }
             if (ModelState.IsValid)
             {
                 try
@@ -179,16 +187,27 @@ namespace PhoneEdit.Controllers
             return _context.Entries.Any(e => e.Id == id);
         }
 
-        [AcceptVerbs("Get", "Post")]
-        public IActionResult VerifyPersonnelNumber(string personnelNumber, int id)
+
+        // Valid only if personnelNumber is unique
+        private bool VerifyPersonnelNumber(string personnelNumber, int id)
         {
             var entry = _context.Entries.FirstOrDefault(e => e.PersonnelNumber == personnelNumber);
-            if(entry != null && entry.Id != id)
-            {
-                return Json($"Табельный номер {personnelNumber} уже существует");
-            }
+            return entry == null || entry.Id == id;
+        }
 
-            return Json(true);
+        private bool VerifyPersonnelNumber(BookEntry entry)
+        {
+            return VerifyPersonnelNumber(entry.PersonnelNumber, entry.Id);
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult RemoteVerifyPersonnelNumber(string personnelNumber, int id)
+        {
+            if(VerifyPersonnelNumber(personnelNumber, id))
+            {
+                return Json(true);
+            }
+            return Json($"Табельный номер {personnelNumber} уже существует");
         }
     }
 }
