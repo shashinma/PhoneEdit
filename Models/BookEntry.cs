@@ -12,21 +12,21 @@ namespace PhoneEdit.Models
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
         [Remote(action: "RemoteVerifyPersonnelNumber",
             controller: "PhoneBook", AdditionalFields = nameof(Id))]
         [DisplayName("Табельный номер")]
         public string PersonnelNumber { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
         [DisplayName("ФИО")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
         [DisplayName("Должность")]
         public string Position { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Поле обязательно для заполнения")]
         [DisplayName("Подразделение")]
         public string Department { get; set; }
 

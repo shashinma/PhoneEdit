@@ -191,8 +191,8 @@ namespace PhoneEdit.Controllers
         // Valid only if personnelNumber is unique
         private bool VerifyPersonnelNumber(string personnelNumber, int id)
         {
-            var entry = _context.Entries.FirstOrDefault(e => e.PersonnelNumber == personnelNumber);
-            return entry == null || entry.Id == id;
+            var entry = _context.Entries.AsNoTracking().FirstOrDefault(e => e.PersonnelNumber == personnelNumber);
+            return (entry == null || entry.Id == id);
         }
 
         private bool VerifyPersonnelNumber(BookEntry entry)
