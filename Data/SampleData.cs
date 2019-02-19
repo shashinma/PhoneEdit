@@ -21,8 +21,8 @@ namespace PhoneEdit.Data
             {
                 var adminUser = new IdentityUser()
                 {
-                    UserName = "help@rtc.ru",
-                    Email = "help@rtc.ru",
+                    UserName = "mail@example.com",
+                    Email = "mail@example.com",
                     EmailConfirmed = true
                 };
                 
