@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using PhoneEdit.Data;
-using PhoneEdit.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +24,12 @@ try
         
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite(identityContextSecrets));
+        
         builder.Services.AddDbContext<PhonebookContext>(options =>
-            options.UseSqlite(phoneBookContextSecrets));
+            options.UseMySql(phoneBookContextSecrets, ServerVersion.AutoDetect(phoneBookContextSecrets))
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors());
     }
     else
     {
@@ -37,22 +40,20 @@ try
         
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite(identityContextDev));
+        
         builder.Services.AddDbContext<PhonebookContext>(options =>
             options.UseSqlite(phoneBookContextDev));
     }
 }
 catch (MySqlException ex)
 {
-    throw new InvalidOperationException("Connection strings not found.", ex);
+    throw new InvalidOperationException("Error: ", ex);
 }
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-
-// builder.Services.AddMvc()
-//     .AddMvcOptions(options => options.ModelMetadataDetailsProviders.Add(new CustomMetadataProvider()));
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
