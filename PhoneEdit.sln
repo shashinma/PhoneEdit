@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneEdit", "PhoneEdit\PhoneEdit.csproj", "{54029476-68A1-4C4A-A9EA-E0D2A4B8AC24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneEdit", "PhoneEdit.csproj", "{54029476-68A1-4C4A-A9EA-E0D2A4B8AC24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
