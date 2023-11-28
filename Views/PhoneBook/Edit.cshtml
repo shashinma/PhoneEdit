@@ -55,8 +55,10 @@
             </div>
             <br/>
             <div class="form-group">
-                <input type="submit" value="Сохранить" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Назад</a>
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+                    
             </div>
         </form>
     </div>
