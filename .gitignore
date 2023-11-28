@@ -3,6 +3,7 @@
 
 .DS_Store
 *.db*
+!*.db
 
 # User-specific files
 *.suo
