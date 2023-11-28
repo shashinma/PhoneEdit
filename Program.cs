@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
 using PhoneEdit.Data;
-using Microsoft.Extensions.DependencyInjection;
 using PhoneEdit.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
