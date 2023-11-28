@@ -36,8 +36,7 @@ public class PhonebookContext : DbContext
             entity.Property(e => e.Id)
                 .IsRequired()
                 .HasColumnName("n")
-                // .HasColumnType("int(11)");
-                .HasColumnType("INTEGER");
+                .HasColumnType("int(11)");
 
             entity.Property(e => e.Room)
                 .IsRequired()
