@@ -1,0 +1,161 @@
+﻿@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+
+@model X.PagedList.IPagedList<PhoneEdit.Models.BookEntry>
+
+
+@{
+    ViewData["Title"] = "Справочник";
+}
+
+
+
+
+<h1>Телефонный справочник</h1>
+<br />
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-3" align="left">
+            <form asp-action="Index" method="get" class="form-inline">
+                <div class="form-group">
+                    <div class="mr-2">
+                        <input name="SearchString" value="@(ViewBag.CurrentFilter as string)" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                    @if (ViewBag.CurrentFilter != null)
+                    {
+                        <a asp-action="Index" class="m-2">Назад</a>
+                    }
+                </div>
+            </form>
+
+        </div>
+        <div class="col" align="right">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="btn btn-success" asp-action="Create">Добавить запись </a>
+            }
+        </div>
+    </div>
+</div>
+<br />
+<nav aria-label="Page navigation example">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { cPage = page, currentFilter = ViewBag.CurrentFilter }),
+        new PagedListRenderOptions()
+        {
+            LiElementClasses = new string[] {"page-item"},
+            UlElementClasses = new string[] {"pagination"},
+            EllipsesElementClass = "page-link",
+            PageClasses = new string[] {"page-link"},
+            DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+            DisplayLinkToLastPage = PagedListDisplayMode.Never,
+            MaximumPageNumbersToDisplay = 5
+        })
+</nav>
+
+
+
+<table class="table table-striped table-hover table-sm">
+    <thead class="thead-light">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].PersonnelNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].LocalPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].CityPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Mail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Room)
+            </th>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="PersonalNumberTable">
+                    <div class="badge badge-info">
+                        @Html.DisplayFor(modelItem => item.PersonnelNumber)
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td class="LocalPhoneNumberTable">
+                    @Html.DisplayFor(modelItem => item.LocalPhoneNumber)
+                </td>
+                <td class="CityPhoneNumberTable">
+                    @Html.DisplayFor(modelItem => item.CityPhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mail)
+                </td>
+                <td class="RoomTable">
+                    @Html.DisplayFor(modelItem => item.Room)
+                </td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info-circle"></i></a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-user-times"></i></a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<nav aria-label="Page navigation example">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { cPage = page, currentFilter = ViewBag.CurrentFilter }),
+        new PagedListRenderOptions()
+        {
+            LiElementClasses = new string[] {"page-item"},
+            UlElementClasses = new string[] {"pagination"},
+            EllipsesElementClass = "page-link",
+            PageClasses = new string[] {"page-link"},
+            DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+            DisplayLinkToLastPage = PagedListDisplayMode.Never,
+            MaximumPageNumbersToDisplay = 5
+        })
+</nav>
+    Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
