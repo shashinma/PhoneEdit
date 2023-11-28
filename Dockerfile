@@ -1,11 +1,11 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["PhoneEdit/PhoneEdit.csproj", "PhoneEdit/"]
+COPY ["PhoneEdit.csproj", "./"]
 RUN dotnet restore "PhoneEdit/PhoneEdit.csproj"
 COPY . .
 WORKDIR "/src/PhoneEdit"
