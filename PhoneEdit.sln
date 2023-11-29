@@ -1,9 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneEdit", "PhoneEdit.csproj", "{1C7D7D5C-0FCD-44D2-85A9-AB6A07260E7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneEdit", "PhoneEdit.csproj", "{54029476-68A1-4C4A-A9EA-E0D2A4B8AC24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1C7D7D5C-0FCD-44D2-85A9-AB6A07260E7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C7D7D5C-0FCD-44D2-85A9-AB6A07260E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C7D7D5C-0FCD-44D2-85A9-AB6A07260E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C7D7D5C-0FCD-44D2-85A9-AB6A07260E7A}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E7D4F8E5-AD8B-4480-8D06-1994FDF9ABCA}
+		{54029476-68A1-4C4A-A9EA-E0D2A4B8AC24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54029476-68A1-4C4A-A9EA-E0D2A4B8AC24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54029476-68A1-4C4A-A9EA-E0D2A4B8AC24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54029476-68A1-4C4A-A9EA-E0D2A4B8AC24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

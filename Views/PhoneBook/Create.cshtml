@@ -1,4 +1,4 @@
-﻿@model PhoneEdit.Models.BookEntry
+@model PhoneEdit.Models.BookEntry
 
 @{
     ViewData["Title"] = "Создание";
@@ -51,17 +51,18 @@
                 <input asp-for="Room" class="form-control" />
                 <span asp-validation-for="Room" class="text-danger"></span>
             </div>
+            <br/>
             <div class="form-group">
-                <input type="submit" value="Добавить" class="btn btn-primary" />
+                <button type="submit" value="Добавить" class="btn btn-primary">Добавить</button>
+                <a asp-action="Index" class="btn btn-secondary">Назад</a >
             </div>
         </form>
     </div>
 </div>
-
+<br/>
 <div>
-    <a asp-action="Index">Назад</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

@@ -1,18 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
 
 namespace PhoneEdit.Data.Migrations
 {
-    public partial class BookEntry : Migration
+    /// <inheritdoc />
+    public partial class InitPhonebookContextMigration : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "tel1",
                 columns: table => new
                 {
-                    n = table.Column<int>(type: "int(11)", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    n = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     tabNumber = table.Column<string>(type: "varchar(5)", nullable: false),
                     name = table.Column<string>(type: "varchar(250)", nullable: false),
                     who = table.Column<string>(type: "varchar(250)", nullable: false),
@@ -21,7 +24,7 @@ namespace PhoneEdit.Data.Migrations
                     telg = table.Column<string>(type: "varchar(100)", nullable: false),
                     mail = table.Column<string>(type: "varchar(250)", nullable: false),
                     komnata = table.Column<string>(type: "varchar(100)", nullable: false),
-                    status = table.Column<string>(type: "varchar(100)", nullable: true)
+                    status = table.Column<string>(type: "varchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,6 +32,7 @@ namespace PhoneEdit.Data.Migrations
                 });
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
