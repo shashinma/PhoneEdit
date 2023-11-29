@@ -59,10 +59,10 @@
             @Html.DisplayFor(model => model.Room)
         </dd>
     </dl>
-    
+    <br/>
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Удалить" class="btn btn-danger" /> |
-        <a asp-action="Index">Назад</a>
+        <input type="submit" value="Удалить" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Назад</a>
     </form>
 </div>

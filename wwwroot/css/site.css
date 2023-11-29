@@ -1,4 +1,4 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
@@ -55,9 +55,9 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-.form-group.required .control-label:after { 
-    content:"*";
-    color:red;
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
 }
 
 /* Table column classes */
@@ -65,12 +65,12 @@ body {
 .LocalPhoneNumberTable,
 .CityPhoneNumberTable,
 .RoomTable {
-    text-align: center;
+  text-align: center;
 }
 
 .table th,
 .table td {
-    padding: 0.75rem;
-    vertical-align: middle !important;
-    border: 1px solid #dee2e6 !important;
+  padding: 0.75rem;
+  vertical-align: middle !important;
+  border: 1px solid #dee2e6 !important;
 }
