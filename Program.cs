@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using PhoneEdit.Data;
-using PhoneEdit.Helpers;
+using PhoneEdit.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,7 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 // Add services to the container.
 try
 {
-    if (!builder.Environment.IsDevelopment())
+    if (builder.Environment.IsDevelopment())
     {
         var identityContextSecrets = builder.Configuration["ConnectionStringsSec:IdentityContext"] ?? 
                               throw new InvalidOperationException("Connection string 'IdentityContext' not found.");
@@ -25,8 +25,13 @@ try
         
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite(identityContextSecrets));
+        
         builder.Services.AddDbContext<PhonebookContext>(options =>
-            options.UseSqlite(phoneBookContextSecrets));
+            options.UseMySql(phoneBookContextSecrets, ServerVersion.AutoDetect(phoneBookContextSecrets))
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors()
+            );
     }
     else
     {
@@ -37,22 +42,20 @@ try
         
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite(identityContextDev));
+        
         builder.Services.AddDbContext<PhonebookContext>(options =>
             options.UseSqlite(phoneBookContextDev));
     }
 }
 catch (MySqlException ex)
 {
-    throw new InvalidOperationException("Connection strings not found.", ex);
+    throw new InvalidOperationException("Error: ", ex);
 }
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-
-// builder.Services.AddMvc()
-//     .AddMvcOptions(options => options.ModelMetadataDetailsProviders.Add(new CustomMetadataProvider()));
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -63,6 +66,8 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 6;
     options.Password.RequiredUniqueChars = 3;
 });
+
+builder.Services.AddScoped<IBookService, BookService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
