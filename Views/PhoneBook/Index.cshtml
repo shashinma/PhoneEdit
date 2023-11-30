@@ -1,4 +1,6 @@
-@model BookEntriesViewModel
+@using X.PagedList.Web.Common
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<BookEntry>
 
 @{
     ViewData["Title"] = "Справочник";
@@ -33,10 +35,23 @@
     </div>
 </div>
 <br />
-
+<nav aria-label="Page navigation example">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { cPage = page, currentFilter = ViewBag.CurrentFilter }),
+        new PagedListRenderOptions()
+        {
+            LiElementClasses = new string[] {"page-item"},
+            UlElementClasses = new string[] {"pagination"},
+            EllipsesElementClass = "page-link",
+            PageClasses = new string[] {"page-link"},
+            DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+            DisplayLinkToLastPage = PagedListDisplayMode.Never,
+            MaximumPageNumbersToDisplay = 5
+        })
+</nav>
+<br />
 <table class="table table-striped table-hover table-sm">
     <thead class="thead-light">
-    @foreach (var item in Model.BookEntries.Take(1))
+    @foreach (var item in Model.Take(1))
     {
         <tr>
             <th>
@@ -79,7 +94,7 @@
     }
     </thead>
     <tbody>
-    @foreach (var item in Model.BookEntries)
+    @foreach (var item in Model)
     {
         <tr>
             <td class="PersonalNumberTable">
