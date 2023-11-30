@@ -31,16 +31,16 @@ public class BookEntry
     public string Department { get; set; }
 
     [DisplayName("Местный телефон")]
-    public string LocalPhoneNumber { get; set; } = string.Empty;
+    public string? LocalPhoneNumber { get; set; } = string.Empty;
 
     [DisplayName("Городской телефон")]
-    public string CityPhoneNumber { get; set; } = string.Empty;
+    public string? CityPhoneNumber { get; set; } = string.Empty;
 
     [DisplayName("Почта")]
-    public string Mail { get; set; } = string.Empty;
+    public string? Mail { get; set; } = string.Empty;
 
     [DisplayName("Комната")]
-    public string Room { get; set; } = string.Empty;
+    public string? Room { get; set; } = string.Empty;
 
     [HiddenInput(DisplayValue = false)] 
     public string Status { get; set; } = string.Empty;
