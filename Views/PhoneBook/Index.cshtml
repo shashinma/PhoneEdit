@@ -13,11 +13,11 @@
     <div class="row">
         <div class="col-3" align="left">
             <form asp-action="Index" method="get" class="form-inline">
-                <div class="form-group mb-2">
-                    <div class="mr-2">
+                <div class="form-group mb-2" style="display: flex">
+                    <div class="mr-2 me-2">
                         <input name="searchString" value="@(ViewBag.CurrentFilter as string)" class="form-control" />
                     </div>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                    <button type="submit" class="btn btn-primary me-2"><i class="fa fa-search"></i></button>
                     @if (ViewBag.CurrentFilter != null)
                     {
                         <a asp-action="Index" class="btn btn-secondary">Назад</a>
@@ -26,7 +26,7 @@
             </form>
 
         </div>
-        <div class="col" align="right">
+        <div class="col pe-0" align="right">
             @if (User.Identity.IsAuthenticated)
             {
                 <a class="btn btn-success" asp-action="Create">Добавить запись </a>
