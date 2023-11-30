@@ -16,7 +16,7 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 // Add services to the container.
 try
 {
-    if (builder.Environment.IsDevelopment())
+    if (!builder.Environment.IsDevelopment())
     {
         var identityContextSecrets = builder.Configuration["ConnectionStringsSec:IdentityContext"] ?? 
                               throw new InvalidOperationException("Connection string 'IdentityContext' not found.");
