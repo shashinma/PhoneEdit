@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PhoneEdit.Data;
@@ -107,53 +107,6 @@ namespace PhoneEdit.Controllers
             return View(bookEntry);
         }
 
-
-
-        // POST: PhoneBook/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
-        // public async Task<IActionResult> Edit(int id, BookEntry bookEntry)
-        // {
-        //     if (id != bookEntry.Id)
-        //     {
-        //         return NotFound();
-        //     }
-        //
-        //     if (!VerifyPersonnelNumber(bookEntry))
-        //     {
-        //         ModelState.AddModelError(nameof(bookEntry.PersonnelNumber), "Табельный номер уже существует");
-        //     }
-        //
-        //     if (ModelState.IsValid)
-        //     {
-        //         try
-        //         {
-        //            
-        //             _context.Entries.Update(bookEntry);
-        //             await _context.SaveChangesAsync();
-        //         }
-        //         catch (DbUpdateConcurrencyException)
-        //         {
-        //             if (!BookEntryExists(bookEntry.Id))
-        //             {
-        //                 return NotFound();
-        //             }
-        //             else
-        //             {
-        //                 throw;
-        //             }
-        //         }
-        //         return RedirectToAction(nameof(Index));
-        //     }
-        //     
-        //     return View(bookEntry);
-        // }
-        
-        // POST: PhoneBook/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,PersonnelNumber,Name,Position,Department,LocalPhoneNumber,CityPhoneNumber,Mail,Room")] BookEntry bookEntry)
