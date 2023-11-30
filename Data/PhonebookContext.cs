@@ -5,7 +5,7 @@ using PhoneEdit.Models;
 
 namespace PhoneEdit.Data
 {
-    public partial class PhonebookContext : DbContext
+    public class PhonebookContext : DbContext
     {
         public PhonebookContext()
         {
@@ -16,7 +16,7 @@ namespace PhoneEdit.Data
         {
         }
 
-        public virtual DbSet<BookEntry> Entries { get; set; }
+        public DbSet<BookEntry> Entries { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
