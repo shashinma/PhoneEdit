@@ -416,6 +416,7 @@ namespace PhoneEdit.Controllers
             {
                 ModelState.AddModelError(nameof(bookEntry.PersonnelNumber), "Табельный номер уже существует");
             }
+
             if (ModelState.IsValid)
             {
                 try
@@ -438,7 +439,7 @@ namespace PhoneEdit.Controllers
             }
             return View(bookEntry);
         }
-
+        
         // GET: PhoneBook/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
