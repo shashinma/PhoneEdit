@@ -1,28 +1,26 @@
-@model X.PagedList.IPagedList<PhoneEdit.Models.BookEntry>
-
+@using X.PagedList.Web.Common
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<BookEntry>
 
 @{
     ViewData["Title"] = "Справочник";
 }
 
-@using X.PagedList.Web.Common
-@using X.PagedList.Mvc.Core
-
-
 <h1>Телефонный справочник</h1>
 <br />
+
 <div class="container-fluid p-0">
     <div class="row">
         <div class="col-3" align="left">
             <form asp-action="Index" method="get" class="form-inline">
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <div class="mr-2">
-                        <input name="SearchString" value="@(ViewBag.CurrentFilter as string)" class="form-control" />
+                        <input name="searchString" value="@(ViewBag.CurrentFilter as string)" class="form-control" />
                     </div>
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                     @if (ViewBag.CurrentFilter != null)
                     {
-                        <a asp-action="Index" class="m-2">Назад</a>
+                        <a asp-action="Index" class="btn btn-secondary">Назад</a>
                     }
                 </div>
             </form>
@@ -50,35 +48,35 @@
             MaximumPageNumbersToDisplay = 5
         })
 </nav>
-
-
-
+<br />
 <table class="table table-striped table-hover table-sm">
     <thead class="thead-light">
+    @foreach (var item in Model.Take(1))
+    {
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model[0].PersonnelNumber)
+                @Html.DisplayNameFor(modelItem => item.PersonnelNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Name)
+                @Html.DisplayNameFor(modelItem => item.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Position)
+                @Html.DisplayNameFor(modelItem => item.Position)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Department)
+                @Html.DisplayNameFor(modelItem => item.Department)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].LocalPhoneNumber)
+                @Html.DisplayNameFor(modelItem => item.LocalPhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].CityPhoneNumber)
+                @Html.DisplayNameFor(modelItem => item.CityPhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Mail)
+                @Html.DisplayNameFor(modelItem => item.Mail)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Room)
+                @Html.DisplayNameFor(modelItem => item.Room)
             </th>
             @if (User.Identity.IsAuthenticated)
             {
@@ -93,51 +91,54 @@
                 </th>
             }
         </tr>
+    }
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td class="PersonalNumberTable">
-                    <div class="badge badge-info">
-                        @Html.DisplayFor(modelItem => item.PersonnelNumber)
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="PersonalNumberTable">
+                <h5>
+                    <div class="badge rounded-pill bg-info text-dark">
+                        @item.PersonnelNumber
                     </div>
+                </h5>
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Position
+            </td>
+            <td>
+                @item.Department
+            </td>
+            <td class="LocalPhoneNumberTable">
+                @item.LocalPhoneNumber
+            </td>
+            <td class="CityPhoneNumberTable">
+                @item.CityPhoneNumber
+            </td>
+            <td>
+                @item.Mail
+            </td>
+            <td class="RoomTable">
+                @item.Room
+            </td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info-circle"></i></a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Position)
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-user-times"></i></a>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Department)
-                </td>
-                <td class="LocalPhoneNumberTable">
-                    @Html.DisplayFor(modelItem => item.LocalPhoneNumber)
-                </td>
-                <td class="CityPhoneNumberTable">
-                    @Html.DisplayFor(modelItem => item.CityPhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Mail)
-                </td>
-                <td class="RoomTable">
-                    @Html.DisplayFor(modelItem => item.Room)
-                </td>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
-                    </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info-circle"></i></a>
-                    </td>
-                    <td>
-                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-user-times"></i></a>
-                    </td>
-                }
-            </tr>
-        }
+            }
+        </tr>
+    }
     </tbody>
 </table>
 <br />
@@ -154,4 +155,4 @@
             MaximumPageNumbersToDisplay = 5
         })
 </nav>
-    Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
