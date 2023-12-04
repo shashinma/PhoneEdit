@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-namespace PhoneEdit.Helpers
-{
-    public class CustomMetadataProvider : IMetadataDetailsProvider, IDisplayMetadataProvider {
-        public void CreateDisplayMetadata(DisplayMetadataProviderContext context) {
+namespace PhoneEdit.Helpers;
 
-            if (context.Key.MetadataKind == ModelMetadataKind.Property) {
+public class CustomMetadataProvider : IMetadataDetailsProvider, IDisplayMetadataProvider {
+    public void CreateDisplayMetadata(DisplayMetadataProviderContext context) {
 
-                context.DisplayMetadata.ConvertEmptyStringToNull = false;
-            }
+        if (context.Key.MetadataKind == ModelMetadataKind.Property) {
+
+            context.DisplayMetadata.ConvertEmptyStringToNull = false;
         }
     }
 }
+
+

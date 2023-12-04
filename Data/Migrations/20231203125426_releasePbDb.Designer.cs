@@ -5,74 +5,74 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhoneEdit.Data;
 
-namespace PhoneEdit.Data.Migrations
+#nullable disable
+
+namespace PhoneEdit.Migrations.Phonebook
 {
     [DbContext(typeof(PhonebookContext))]
-    [Migration("20190214095704_BookEntry")]
-    partial class BookEntry
+    [Migration("20231203125426_releasePbDb")]
+    partial class releasePbDb
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
+                .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("PhoneEdit.Models.BookEntry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("n")
-                        .HasColumnType("int(11)");
+                        .HasColumnType("int(11)")
+                        .HasColumnName("n");
 
                     b.Property<string>("CityPhoneNumber")
-                        .IsRequired()
-                        .HasColumnName("telg")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("telg");
 
                     b.Property<string>("Department")
                         .IsRequired()
-                        .HasColumnName("work")
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("varchar(250)")
+                        .HasColumnName("work");
 
                     b.Property<string>("LocalPhoneNumber")
-                        .IsRequired()
-                        .HasColumnName("telm")
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("telm");
 
                     b.Property<string>("Mail")
-                        .IsRequired()
-                        .HasColumnName("mail")
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("varchar(250)")
+                        .HasColumnName("mail");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnName("name")
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("varchar(250)")
+                        .HasColumnName("name");
 
                     b.Property<string>("PersonnelNumber")
                         .IsRequired()
-                        .HasColumnName("tabNumber")
-                        .HasColumnType("varchar(5)");
+                        .HasColumnType("varchar(5)")
+                        .HasColumnName("tabNumber");
 
                     b.Property<string>("Position")
                         .IsRequired()
-                        .HasColumnName("who")
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("varchar(250)")
+                        .HasColumnName("who");
 
                     b.Property<string>("Room")
-                        .IsRequired()
-                        .HasColumnName("komnata")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("komnata");
 
                     b.Property<string>("Status")
-                        .HasColumnName("status")
-                        .HasColumnType("varchar(100)");
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("status");
 
                     b.HasKey("Id")
                         .HasName("PRIMARY");
 
-                    b.ToTable("tel1");
+                    b.ToTable("tel1", (string)null);
                 });
 #pragma warning restore 612, 618
         }

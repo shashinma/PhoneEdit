@@ -1,4 +1,4 @@
-﻿@model PhoneEdit.Models.BookEntry
+@model PhoneEdit.Models.BookEntry
 
 @{
     ViewData["Title"] = "Details";
@@ -60,6 +60,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Редактировать</a> |
-    <a asp-action="Index">Назад</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary mr-2">Редактировать</a>
+    <a href="@Url.Action("Index", new { currentFilter = "" })" class="btn btn-secondary me-2">Назад</a>
 </div>
