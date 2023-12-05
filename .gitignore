@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 /appsettings.json
 docker-compose.yml
+*.db
