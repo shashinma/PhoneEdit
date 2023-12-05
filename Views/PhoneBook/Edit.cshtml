@@ -1,4 +1,4 @@
-﻿@model PhoneEdit.Models.BookEntry
+@model PhoneEdit.Models.BookEntry
 
 @{
     ViewData["Title"] = "Edit";
@@ -54,14 +54,11 @@
                 <span asp-validation-for="Room" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary mr-2" />
+                <a href="@Url.Action("Index", new { currentFilter = "" })" class="btn btn-secondary me-2">Назад</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Назад</a>
 </div>
 
 @section Scripts {

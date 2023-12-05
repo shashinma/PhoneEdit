@@ -59,10 +59,10 @@
             @Html.DisplayFor(model => model.Room)
         </dd>
     </dl>
-    
+    <br/>
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Удалить" class="btn btn-danger" /> |
-        <a asp-action="Index">Назад</a>
-    </form>
+        <input type="submit" value="Удалить" class="btn btn-danger mr-2" />
+        <a href="@Url.Action("Index", new { currentFilter = "" })" class="btn btn-secondary me-2">Назад</a>
+        </form>
 </div>
