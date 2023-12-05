@@ -1,33 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace PhoneEdit.Data
+namespace PhoneEdit.Data;
+
+public class SampleData
 {
-    public static class SampleData
+    private static IConfiguration _configuration;
+
+    public SampleData(IConfiguration configuration)
     {
-        // Creates default app's admin
-        public static async Task CreateDefaultUser(IServiceProvider serviceProvider)
+        _configuration = configuration;
+    }
+    // Creates default app's admin
+    public static async Task CreateDefaultUser(IServiceProvider serviceProvider)
+    {
+        var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+        var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+        
+        var defaultUsername = configuration.GetValue<string>("DefaultUsername");
+        var defaultPassword = configuration.GetValue<string>("DefaultPassword");
+
+        var userCheck = await userManager.Users.AnyAsync();
+        if (!userCheck)
         {
-            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
-  
-            
-            var userCheck = await userManager.Users.AnyAsync();
-            if (!userCheck)
+            var adminUser = new IdentityUser()
             {
-                var adminUser = new IdentityUser()
-                {
-                    UserName = "mail@example.com",
-                    Email = "mail@example.com",
-                    EmailConfirmed = true
-                };
-                
-                await userManager.CreateAsync(adminUser, "123456");
-            }
+                UserName = Environment.GetEnvironmentVariable("USERNAME") ?? defaultUsername,
+                Email = Environment.GetEnvironmentVariable("USERNAME") ?? defaultUsername,
+                EmailConfirmed = true
+            };
+
+            await userManager.CreateAsync(adminUser, (Environment.GetEnvironmentVariable("PASSWORD") ?? defaultPassword) ?? throw new InvalidOperationException());
         }
     }
 }

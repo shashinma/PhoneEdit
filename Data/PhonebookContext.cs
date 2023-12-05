@@ -1,11 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using PhoneEdit.Models;
 
 namespace PhoneEdit.Data
 {
-    public partial class PhonebookContext : DbContext
+    public class PhonebookContext : DbContext
     {
         public PhonebookContext()
         {
@@ -16,11 +18,11 @@ namespace PhoneEdit.Data
         {
         }
 
-        public virtual DbSet<BookEntry> Entries { get; set; }
+        public DbSet<BookEntry> Entries { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,15 +37,13 @@ namespace PhoneEdit.Data
                 entity.Property(e => e.Id)
                     .IsRequired()
                     .HasColumnName("n")
-                    .HasColumnType("int(11)");
+                    .HasColumnType("integer");
 
                 entity.Property(e => e.Room)
-                    .IsRequired()
                     .HasColumnName("komnata")
                     .HasColumnType("varchar(100)");
 
                 entity.Property(e => e.Mail)
-                    .IsRequired()
                     .HasColumnName("mail")
                     .HasColumnType("varchar(250)");
 
@@ -62,12 +62,10 @@ namespace PhoneEdit.Data
                     .HasColumnType("varchar(5)");
 
                 entity.Property(e => e.CityPhoneNumber)
-                    .IsRequired()
                     .HasColumnName("telg")
                     .HasColumnType("varchar(100)");
 
                 entity.Property(e => e.LocalPhoneNumber)
-                    .IsRequired()
                     .HasColumnName("telm")
                     .HasColumnType("varchar(50)");
 
