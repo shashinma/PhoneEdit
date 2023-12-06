@@ -73,7 +73,6 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
-// Apply migrations if there are any pending
 using (var scope = app.Services.CreateScope())
 {
     var appDbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -83,9 +82,8 @@ using (var scope = app.Services.CreateScope())
     {
         appDbContext.Database.Migrate();
     }
+    
+    await SampleData.CreateDefaultUser(scope.ServiceProvider);
 }
-
-var serviceProvider = builder.Services.BuildServiceProvider();
-await SampleData.CreateDefaultUser(serviceProvider);
 
 app.Run();
