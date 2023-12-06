@@ -263,4 +263,4 @@ __pycache__/
 docker-compose.yml
 *.db
 *.db*
-*.Development.*
+*.Development.json
