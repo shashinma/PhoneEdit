@@ -17,10 +17,7 @@ try
     
     builder.Services.AddDbContext<PhonebookContext>(options => 
         options.UseMySql(phoneBookContextSecrets, ServerVersion.AutoDetect(phoneBookContextSecrets))
-            .LogTo(Console.WriteLine, LogLevel.Information)
-            .EnableSensitiveDataLogging()
-            .EnableDetailedErrors()
-        );
+    );
 }
 catch (MySqlException ex)
 {
