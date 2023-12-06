@@ -21,7 +21,7 @@ try
 }
 catch (MySqlException ex)
 {
-    throw new InvalidOperationException("Error: ", ex);
+    throw ex;
 }
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
