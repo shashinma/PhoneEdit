@@ -263,4 +263,4 @@ appsettings.json
 docker-compose.yml
 *.db
 *.db*
-appsettings.Development.json
+*.Development.json
