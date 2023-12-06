@@ -89,6 +89,6 @@ using (var scope = app.Services.CreateScope())
 }
 
 var serviceProvider = builder.Services.BuildServiceProvider();
-SampleData.CreateDefaultUser(serviceProvider).Wait();
+await SampleData.CreateDefaultUser(serviceProvider);
 
 app.Run();
