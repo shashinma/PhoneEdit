@@ -7,9 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 try
 {
-    var identityContextSecrets = builder.Configuration["ConnectionStrings:IdentityContext"] ?? 
+    var identityContextSecrets = builder.Configuration.GetConnectionString("IdentityContext") ?? 
                                  throw new InvalidOperationException("Connection string 'IdentityContext' not found.");
-    var phoneBookContextSecrets = builder.Configuration["ConnectionStrings:PhoneBookContext"] ?? 
+    var phoneBookContextSecrets = builder.Configuration.GetConnectionString("PhoneBookContext") ?? 
                                   throw new InvalidOperationException("Connection string 'PhoneBookContext' not found.");
         
     builder.Services.AddDbContext<ApplicationDbContext>(options => 
