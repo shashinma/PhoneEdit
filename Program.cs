@@ -5,8 +5,6 @@ using PhoneEdit.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-try
-{
     var identityContextSecrets = builder.Configuration.GetConnectionString("IdentityContext") ?? 
                                  throw new InvalidOperationException("Connection string 'IdentityContext' not found.");
     var phoneBookContextSecrets = builder.Configuration.GetConnectionString("PhoneBookContext") ?? 
@@ -18,11 +16,6 @@ try
     builder.Services.AddDbContext<PhonebookContext>(options => 
         options.UseMySql(phoneBookContextSecrets, ServerVersion.AutoDetect(phoneBookContextSecrets))
     );
-}
-catch (MySqlException ex)
-{
-    throw ex;
-}
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
