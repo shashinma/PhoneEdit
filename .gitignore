@@ -264,3 +264,4 @@ docker-compose.yml
 *.db
 *.db*
 *.Development.json
+.DS_Store
