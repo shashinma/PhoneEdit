@@ -8,20 +8,20 @@
 >docker-compose.yml
 ```yml
 version: '3.8'
-name: compose_name
+name: rtcservices
 services:
   phoneedit:
-    container_name: container_name
+    container_name: phoneedit
     image: ghcr.io/shashinma/phoneedit:latest
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - <port>:8080
+      - 5000:8080
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ConnectionStrings__IdentityContext: DataSource=IdentityContext.db;Cache=Shared
       ConnectionStrings__PhoneBookContext: Server=<mysql_server_ip>;Database=<mysql_db_name>;user=<username>;password=<password>
-      USERNAME: your_username
-      PASSWORD: your_password
+      DefaultUser__Username: your_username
+      DefaultUser__Password: your_password
 ```      
