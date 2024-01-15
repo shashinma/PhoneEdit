@@ -53,6 +53,7 @@
                 <input asp-for="Room" class="form-control" />
                 <span asp-validation-for="Room" class="text-danger"></span>
             </div>
+            <br/>
             <div class="form-group">
                 <input type="submit" value="Сохранить" class="btn btn-primary mr-2" />
                 <a href="@Url.Action("Index", new { currentFilter = "" })" class="btn btn-secondary me-2">Назад</a>
