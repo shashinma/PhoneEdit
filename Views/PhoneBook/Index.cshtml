@@ -39,8 +39,8 @@
     @Html.PagedListPager(Model, page => Url.Action("Index", new { cPage = page, currentFilter = ViewBag.CurrentFilter }),
         new PagedListRenderOptions()
         {
-            LiElementClasses = new string[] {"page-item"},
-            UlElementClasses = new string[] {"pagination"},
+            LiElementClasses = new string[] {"page-item m-0 p-0 border-0"},
+            UlElementClasses = new string[] {"pagination m-0"},
             EllipsesElementClass = "page-link",
             PageClasses = new string[] {"page-link"},
             DisplayLinkToFirstPage = PagedListDisplayMode.Never,
@@ -99,7 +99,7 @@
         <tr>
             <td class="PersonalNumberTable">
                 <h5>
-                    <div class="badge rounded-pill bg-info text-dark">
+                    <div class="badge rounded-pill bg-info text-light">
                         @item.PersonnelNumber
                     </div>
                 </h5>
@@ -128,13 +128,13 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <td>
-                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-warning" style="background-color: rgba(252,184,11,0.74)" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
                 </td>
                 <td>
-                    <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info-circle"></i></a>
+                    <a class="btn btn-secondary" style="background-color: rgba(114,114,114,0.74)" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info-circle"></i></a>
                 </td>
                 <td>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-user-times"></i></a>
+                    <a class="btn btn-danger" style="background-color: rgba(250,50,80,0.74)" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-user-times"></i></a>
                 </td>
             }
         </tr>
@@ -146,8 +146,8 @@
     @Html.PagedListPager(Model, page => Url.Action("Index", new { cPage = page, currentFilter = ViewBag.CurrentFilter }),
         new PagedListRenderOptions()
         {
-            LiElementClasses = new string[] {"page-item"},
-            UlElementClasses = new string[] {"pagination"},
+            LiElementClasses = new string[] {"page-item m-0 p-0 border-0"},
+            UlElementClasses = new string[] {"pagination m-0"},
             EllipsesElementClass = "page-link",
             PageClasses = new string[] {"page-link"},
             DisplayLinkToFirstPage = PagedListDisplayMode.Never,
@@ -155,4 +155,5 @@
             MaximumPageNumbersToDisplay = 5
         })
 </nav>
+<br/>
 Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
