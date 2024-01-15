@@ -99,7 +99,7 @@
         <tr>
             <td class="PersonalNumberTable">
                 <h5>
-                    <div class="badge rounded-pill bg-info text-light">
+                    <div class="badge rounded-pill text-light" style="background-color: rgba(1,125,136,0.75)">
                         @item.PersonnelNumber
                     </div>
                 </h5>
@@ -128,13 +128,13 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <td>
-                    <a class="btn btn-warning" style="background-color: rgba(252,184,11,0.74)" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-warning" style="width: 40px; background-color: rgba(252,184,11,0.75)" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-edit" style="width: 16px; height: 16px;"></i></a>
                 </td>
                 <td>
-                    <a class="btn btn-secondary" style="background-color: rgba(114,114,114,0.74)" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info-circle"></i></a>
+                    <a class="btn btn-secondary" style="width: 40px; background-color: rgba(114,114,114,0.75)" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info-circle" style="width: 16px; height: 16px;"></i></a>
                 </td>
                 <td>
-                    <a class="btn btn-danger" style="background-color: rgba(250,50,80,0.74)" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-user-times"></i></a>
+                    <a class="btn btn-danger" style="width: 40px; background-color: rgba(250,50,80,0.75)" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-user-times" style="width: 16px; height: 16px;"></i></a>
                 </td>
             }
         </tr>
