@@ -17,9 +17,8 @@ namespace PhoneEdit.Controllers
             _context = context;
         }
 
-        // GET: PhoneBook
         [AllowAnonymous]
-        public async Task<IActionResult> Index(string? searchString, string? currentFilter, int? cPage)
+        public async Task<IActionResult> Index(string searchString, string currentFilter, int? cPage)
         {
             if (searchString != null)
             {
@@ -32,21 +31,25 @@ namespace PhoneEdit.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var entries = await _context.Entries.Select(e => e).ToListAsync();
+            IQueryable<BookEntry> entriesQuery = _context.Entries;
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                entries = entries.Where(e => e.ToString().Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+                entriesQuery = entriesQuery.Where(e =>
+                    e.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                    e.PersonnelNumber.Contains(searchString, StringComparison.OrdinalIgnoreCase));
             }
 
-            entries = entries.OrderBy(e => e.Name).ToList();
+            entriesQuery = entriesQuery.OrderBy(e => e.Name);
 
             int pageSize = 25;
             int pageNumber = (cPage ?? 1);
 
-            return View(entries.AsQueryable().ToPagedList(pageNumber, pageSize));
+            var entries = await entriesQuery.ToPagedListAsync(pageNumber, pageSize);
+
+            return View(entries);
         }
-        
+
         // GET: PhoneBook/Details/5
         public async Task<IActionResult> Details(int? id)
         {
