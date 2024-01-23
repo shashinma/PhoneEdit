@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PhoneEdit.Data;
 using PhoneEdit.Models;
@@ -23,9 +17,8 @@ namespace PhoneEdit.Controllers
             _context = context;
         }
 
-        // GET: PhoneBook
         [AllowAnonymous]
-        public async Task<IActionResult> Index(string currentFilter, string searchString, int? cPage)
+        public async Task<IActionResult> Index(string searchString, string currentFilter, int? cPage)
         {
             if (searchString != null)
             {
@@ -38,20 +31,26 @@ namespace PhoneEdit.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var entries = from e in _context.Entries
-                select e;
-                    
-                    
+            IQueryable<BookEntry> entriesQuery = _context.Entries;
+
             if (!string.IsNullOrEmpty(searchString))
             {
-                entries = entries.Where(e => e.ToString().Contains(searchString, StringComparison.OrdinalIgnoreCase));
+                entriesQuery = entriesQuery.Where(e =>
+                    e.Name.Contains(searchString) ||
+                    e.Mail.Contains(searchString) ||
+                    e.Room.Contains(searchString) ||
+                    e.LocalPhoneNumber.Contains(searchString) ||
+                    e.PersonnelNumber.Contains(searchString));
             }
 
-            entries = entries.OrderBy(e => e.Name);
+            entriesQuery = entriesQuery.OrderBy(e => e.Name);
 
-            int pageSize = 25;
+            const int pageSize = 25;
             int pageNumber = (cPage ?? 1);
-            return View((await entries.ToListAsync()).ToPagedList(pageNumber,pageSize));
+
+            var entries = await entriesQuery.ToPagedListAsync(pageNumber, pageSize);
+
+            return View(entries);
         }
 
         // GET: PhoneBook/Details/5
@@ -114,12 +113,9 @@ namespace PhoneEdit.Controllers
             return View(bookEntry);
         }
 
-        // POST: PhoneBook/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PersonnelNumber,Name,Position,Department,LocalPhoneNumber,CityPhoneNumber,Mail,Room, Status")] BookEntry bookEntry)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PersonnelNumber,Name,Position,Department,LocalPhoneNumber,CityPhoneNumber,Mail,Room")] BookEntry bookEntry)
         {
             if (id != bookEntry.Id)
             {
@@ -152,7 +148,7 @@ namespace PhoneEdit.Controllers
             }
             return View(bookEntry);
         }
-
+        
         // GET: PhoneBook/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -186,8 +182,7 @@ namespace PhoneEdit.Controllers
         {
             return _context.Entries.Any(e => e.Id == id);
         }
-
-
+        
         // Valid only if personnelNumber is unique
         private bool VerifyPersonnelNumber(string personnelNumber, int id)
         {

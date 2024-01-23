@@ -1,0 +1,19 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches:
+      - 'master'
+      - 'dev'
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the PhoneEdit Docker image
+        working-directory: .
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
