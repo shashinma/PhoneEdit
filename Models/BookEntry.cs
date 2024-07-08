@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
@@ -41,7 +39,7 @@ public class BookEntry
     [DisplayName("Комната")]
     public string? Room { get; set; } = string.Empty;
 
-    [HiddenInput(DisplayValue = false)] 
+    [HiddenInput(DisplayValue = false)]
     public string Status { get; set; } = string.Empty;
 
     public override string ToString()
