@@ -18,7 +18,7 @@ namespace PhoneEdit.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index(string searchString, string currentFilter, int? cPage)
+        public async Task<IActionResult> Index(string? searchString, string? currentFilter, int? cPage)
         {
             if (searchString != null)
             {
@@ -37,9 +37,11 @@ namespace PhoneEdit.Controllers
             {
                 entriesQuery = entriesQuery.Where(e =>
                     e.Name.Contains(searchString) ||
+                    e.Department.Contains(searchString) ||
                     e.Mail.Contains(searchString) ||
                     e.Room.Contains(searchString) ||
                     e.LocalPhoneNumber.Contains(searchString) ||
+                    e.CityPhoneNumber.Contains(searchString) ||
                     e.PersonnelNumber.Contains(searchString));
             }
 
@@ -78,7 +80,7 @@ namespace PhoneEdit.Controllers
         }
 
         // POST: PhoneBook/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -148,7 +150,7 @@ namespace PhoneEdit.Controllers
             }
             return View(bookEntry);
         }
-        
+
         // GET: PhoneBook/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -182,7 +184,7 @@ namespace PhoneEdit.Controllers
         {
             return _context.Entries.Any(e => e.Id == id);
         }
-        
+
         // Valid only if personnelNumber is unique
         private bool VerifyPersonnelNumber(string personnelNumber, int id)
         {
