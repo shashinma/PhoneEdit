@@ -1,4 +1,3 @@
-@using X.PagedList.Web.Common
 @using X.PagedList.Mvc.Core
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model X.PagedList.IPagedList<BookEntry>
@@ -52,7 +51,7 @@
 <br />
 <table class="table table-striped table-hover table-sm">
     <thead class="thead-light">
-    @if(Model.Any()) 
+    @if(Model.Any())
     {
         var item = Model.First();
         <tr>
